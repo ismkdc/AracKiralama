@@ -1,0 +1,132 @@
+﻿@model IEnumerable<AracKiralama.Models.Car>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <h1><a href="admin.html">Yusuf Oto Kiralama Admin</a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="sidebar content-box" style="display: block;">
+                    <ul class="nav">
+                        <!-- Main menu -->
+                        <li class="current"><a href="~/Admin/Index"><i class="glyphicon glyphicon-home"></i> Araçlar</a></li>
+                        <li><a href="~/Admin/AddNewCar"><i class="glyphicon glyphicon-pencil"></i> Araç Ekle</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <h4>Araçlar</h4>
+                <div class="table-responsive">
+
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                        <th>Fotoğraf</th>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>Tarih</th>
+                        <th>Fiyat</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var car in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@car.ImageUrl" alt="Lights" style="width:100px">
+                                    </td>
+                                    <td>@car.Brand</td>
+                                    <td>@car.Model</td>
+                                    <td>@car.ProductionYear</td>
+                                    <td>@car.Price TL</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span onclick="$('#updateid').attr('value',@car.Id)" class="glyphicon glyphicon-pencil"></span></button></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span onclick="window.location = 'admin/deletecar?id=@car.Id';" class="glyphicon glyphicon-trash"></span></button></p>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Araç Bilgilerini Düzenle</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="updateid" name="updateid" />
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Brand" placeholder="Marka giriniz">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Model" placeholder="Model giriniz">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="productionyear" placeholder="Tarih(Yıl)">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Price" placeholder="Fiyat (TL)">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Araç Fotoğrafı Seç</label>
+                            <input type="file" name="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                            <small id="fileHelp" class="form-text text-muted">Aracınız ile ilgili bir fotoğraf ekleyiniz.</small>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn" value="Kaydet">
+
+                        </div>
+                        </form>
+</div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="copy text-center">
+                    Copyright 2017 <a href='#'>Yusuf Gökmen</a>
+                </div>
+            </div>
+        </footer>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+        <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="~/Content/js/custom.js"></script>
+</body>
+</html>
