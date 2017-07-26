@@ -9,7 +9,7 @@ namespace AracKiralama.Models
 {
     public class AccessManager
     {
-        readonly string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|db.mdb;Persist Security Info=False;";
+        readonly string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|db.mdb;";
         private OleDbConnection connection;
 
         public AccessManager()
